@@ -1,0 +1,20 @@
+{
+  "private": true,
+  "name": "nerualnet",
+  "version": "0.0.0",
+  "description": "feed forward neural network",
+  "author": "Chris Frazier",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chrisfrazier0/neuralnet"
+  },
+  "engines": {
+    "npm": "please-use-yarn",
+    "node": ">=20.2"
+  },
+  "engineStrict": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
