@@ -9,18 +9,21 @@ const network = brain.network(
     brain.layer.input({ size: 784 }),
     brain.layer.dense({ size: 16, activation: 'tanh' }),
     brain.layer.dense({ size: 16, activation: 'tanh' }),
-    brain.layer.output({ size: 10, activation: 'tanh', util: 'onehot' }),
+    brain.layer.output({ size: 10, activation: 'tanh' }),
 )
+
+console.log('epoch  trainingCost  testCost  accuracy')
 
 network.train({
     trainingData,
     testData,
+    method: 'onehot',
     epochs: 40,
     learningRate: 0.18,
 
-    callback(e, total, cost, acc) {
-        console.log('%d/%d\tcost = %f\taccuracy = %f', e+1, total, cost, acc)
+    callback(e, trainingCost, testCost, acc) {
+        console.log('%d  %d  %d  %d', e+1, trainingCost, testCost, acc)
     },
 })
 
-console.log('\nNetwork Accuracy: ', network.test(testData).toFixed(2), '%')
+console.log('\nNetwork Accuracy: ', network.test(testData, 'onehot')[1].toFixed(2), '%')

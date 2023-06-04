@@ -10,20 +10,22 @@ const data = [
 const network = brain.network(
     brain.layer.input({ size: 2 }),
     brain.layer.dense({ size: 3, activation: 'tanh' }),
-    brain.layer.output({ size: 1, activation: 'tanh', util: 'round' }),
+    brain.layer.output({ size: 1, activation: 'tanh' }),
 )
+
+const epochs = 900
 
 network.train({
     trainingData: data,
-    epochs: 900,
+    epochs,
     learningRate: 0.4,
 
-    callback(e, total, cost) {
-        console.log('%d/%d\tcost = %f', e+1, total, cost)
+    callback(e, trainingCost) {
+        console.log('%d/%d\tcost = %f', e+1, epochs, trainingCost)
     },
 })
 
-console.log('\nXOR(0,0) = ', network.run(0, 0))
-console.log('XOR(0,1) = ',   network.run(0, 1))
-console.log('XOR(1,0) = ',   network.run(1, 0))
-console.log('XOR(1,1) = ',   network.run(1, 1))
+console.log('\nXOR(0,0) = ', network.round(0, 0).val)
+console.log('XOR(0,1) = ',   network.round(0, 1).val)
+console.log('XOR(1,0) = ',   network.round(1, 0).val)
+console.log('XOR(1,1) = ',   network.round(1, 1).val)
